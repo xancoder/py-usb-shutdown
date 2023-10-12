@@ -8,7 +8,6 @@ import time
 
 CONFIG = {
     'poll_interval': 0.25,
-    'whitelist': [],
     'platforms': {
         'Linux': {
             'shutdown': 'shutdown -h now'
@@ -31,7 +30,7 @@ def watch_drives() -> None:
         time.sleep(CONFIG['poll_interval'])
 
 
-def check_platform(config):
+def check_platform(config: dict) -> str:
     current_platform = platform.system()
     supported_platforms = [k for k in config['platforms']]
     if current_platform not in supported_platforms:
@@ -64,7 +63,7 @@ def list_drives_linux() -> list:
     return devices
 
 
-def list_drives_windows():
+def list_drives_windows() -> any:
     """
     Get a list of drives using WMI
     :return: list of Drive
