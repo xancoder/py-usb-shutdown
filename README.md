@@ -20,10 +20,11 @@ Invoke-WebRequest -Uri $url -OutFile $dest
 .\python-3.11.5-amd64.exe /quiet InstallAllUsers=0 PrependPath=1
 ```
 
+accept the User Account Control (UAC) and after a period of time
+
 use the following commands to build an executable found in the default `dist` directory
 
 ```PowerShell
-Start-Sleep -Seconds 300
 py -m pip install --user pipx
 C:\Users\vboxuser\AppData\Roaming\Python\Python311\Scripts\pipx install poetry
 cd Z:\py-usb-shutdown
