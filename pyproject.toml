@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "py-usb-shutdown"
+version = "0.1.0"
+description = ""
+authors = ["xancoder <xancoder@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.13"
+
+[tool.poetry.scripts]
+cli = "py_usb_shutdown.cli:main"
+build_linux = "pyinstaller:build_linux"
+build_windows = "pyinstaller:build_windows"
+
+[tool.poetry.group.dev.dependencies]
+pyinstaller = "^6.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
