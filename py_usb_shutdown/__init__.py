@@ -10,7 +10,7 @@ CONFIG = {
     'poll_interval': 0.25,
     'platforms': {
         'Linux': {
-            'shutdown': 'shutdown -h now'
+            'shutdown': 'shutdown now -h',
         },
         'Windows': {
             'shutdown': 'shutdown /s /f /t 0'
@@ -25,7 +25,8 @@ def watch_drives() -> None:
     while True:
         devices = read_devices(current_platform)
         if prev != devices:
-            os.system(CONFIG["platforms"][current_platform]["shutdown"])
+            print(CONFIG['platforms'][current_platform]['shutdown'])
+            os.system(CONFIG['platforms'][current_platform]['shutdown'])
             prev = devices
         time.sleep(CONFIG['poll_interval'])
 

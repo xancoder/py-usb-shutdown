@@ -24,7 +24,25 @@ Start-Process -FilePath $dest -ArgumentList "/quiet InstallAllUsers=0 PrependPat
 C:\Users\vboxuser\AppData\Local\Programs\Python\Python312\python -m pip install --user pipx
 C:\Users\vboxuser\AppData\Roaming\Python\Python312\Scripts\pipx install poetry
 
-cd Z:\py-usb-shutdown
 C:\Users\vboxuser\.local\bin\poetry install
 C:\Users\vboxuser\.local\bin\poetry run build_windows
 ```
+
+the app is located in the `dist` folder
+
+## Linux builds
+
+this example was tested in an unattended virtualbox debian virtual machine installation, so path and names should be
+adopted
+
+in a terminal at project folder use following commands
+
+```bash
+# as root
+apt install -y python3-poetry
+# as user
+poetry install
+poetry run build_linux
+```
+
+start the app in the `dist` folder with root privileges
