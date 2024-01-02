@@ -9,25 +9,39 @@ is a watchdog that waits for a change on your USB ports and then immediately shu
 
 ## Windows builds
 
-tested in an unattended virtualbox Windows 10 virtual machine installation
+this example was tested in an unattended virtualbox Windows 10 virtual machine installation, so path and names should be
+adopted
 
-in a powershell manually install python from https://www.python.org/
+in a powershell at project folder use following commands
 
 ```PowerShell
-$url = "https://www.python.org/ftp/python/3.11.5/python-3.11.5-amd64.exe"
-$dest = ".\python-3.11.5-amd64.exe"
+$url = "https://www.python.org/ftp/python/3.12.1/python-3.12.1-amd64.exe"
+$dest = ".\python-3.12.1-amd64.exe"
 Invoke-WebRequest -Uri $url -OutFile $dest
-.\python-3.11.5-amd64.exe /quiet InstallAllUsers=0 PrependPath=1
+
+Start-Process -FilePath $dest -ArgumentList "/quiet InstallAllUsers=0 PrependPath=1" -Wait
+
+C:\Users\vboxuser\AppData\Local\Programs\Python\Python312\python -m pip install --user pipx
+C:\Users\vboxuser\AppData\Roaming\Python\Python312\Scripts\pipx install poetry
+
+C:\Users\vboxuser\.local\bin\poetry install
+C:\Users\vboxuser\.local\bin\poetry run build_windows
 ```
 
-accept the User Account Control (UAC) and after a period of time
+the app is located in the `dist` folder
 
-use the following commands to build an executable found in the default `dist` directory
+## Linux builds
 
-```PowerShell
-py -m pip install --user pipx
-C:\Users\vboxuser\AppData\Roaming\Python\Python311\Scripts\pipx install poetry
-cd Z:\py-usb-shutdown
-C:\Users\vboxuser\.local\pipx\venvs\poetry\Scripts\poetry.exe install
-C:\Users\vboxuser\.local\pipx\venvs\poetry\Scripts\poetry.exe run build_windows
+this example was tested in an unattended virtualbox debian virtual machine installation
+
+in a terminal at project folder use following commands
+
+```bash
+# as root
+apt install -y python3-poetry
+# as user
+poetry install
+poetry run build_linux
 ```
+
+start the app in the `dist` folder with root privileges
