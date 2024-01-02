@@ -15,7 +15,7 @@ build_linux = "pyinstaller:build_linux"
 build_windows = "pyinstaller:build_windows"
 
 [tool.poetry.group.dev.dependencies]
-pyinstaller = "^6.0.0"
+pyinstaller = "^6.3.0"
 
 [build-system]
 requires = ["poetry-core"]
