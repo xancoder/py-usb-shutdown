@@ -20,33 +20,34 @@ CONFIG = {
 
 
 def watch_drives() -> None:
-    current_platform = check_platform(CONFIG)
-    prev = read_devices(current_platform)
+    system = check_platform_system(CONFIG)
+
+    prev_devices = read_devices(system)
     while True:
-        devices = read_devices(current_platform)
-        if prev != devices:
-            print(CONFIG['platforms'][current_platform]['shutdown'])
-            os.system(CONFIG['platforms'][current_platform]['shutdown'])
-            prev = devices
+        devices = read_devices(system)
+        if prev_devices != devices:
+            os.system(CONFIG['platforms'][system]['shutdown'])
+            prev_devices = devices
         time.sleep(CONFIG['poll_interval'])
 
 
-def check_platform(config: dict) -> str:
-    current_platform = platform.system()
-    supported_platforms = [k for k in config['platforms']]
-    if current_platform not in supported_platforms:
-        print('platform system not supported')
+def check_platform_system(config: dict) -> str:
+    system = platform.system()
+
+    supported_systems = [k for k in config['platforms']]
+    if system not in supported_systems:
+        print(f'[-] platform system not supported: {system}')
         sys.exit(1)
-    return current_platform
+    return system
 
 
-def read_devices(current_platform: str) -> list:
-    if current_platform == 'Linux':
+def read_devices(system: str) -> list:
+    if system == 'Linux':
         ret = list_drives_linux()
-    elif current_platform == 'Windows':
+    elif system == 'Windows':
         ret = list_drives_windows()
     else:
-        print(f'[-] no list devices method due to platform: {current_platform}')
+        print(f'[-] no list devices method due to platform: {system}')
         sys.exit(1)
     return ret
 
@@ -84,7 +85,7 @@ def list_drives_windows() -> any:
         creationflags=create_no_window
     )
     if proc.returncode != 0 or not proc.stdout.strip():
-        print('Failed to enumerate drives')
+        print('[-] failed to list drives on windows')
         return []
     devices = json.loads(proc.stdout)
     return devices

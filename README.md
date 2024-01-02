@@ -9,8 +9,7 @@ is a watchdog that waits for a change on your USB ports and then immediately shu
 
 ## Windows builds
 
-this example was tested in an unattended virtualbox Windows 10 virtual machine installation, so path and names should be
-adopted
+tested in an unattended virtualbox Windows 10 virtual machine installation, so path and names should be adopted
 
 in a powershell at project folder use following commands
 
@@ -32,8 +31,7 @@ the app is located in the `dist` folder
 
 ## Linux builds
 
-this example was tested in an unattended virtualbox debian virtual machine installation, so path and names should be
-adopted
+tested in an unattended virtualbox debian virtual machine installation
 
 in a terminal at project folder use following commands
 
