@@ -6,13 +6,13 @@ authors = ["xancoder <xancoder@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 
+[tool.poetry.scripts]
+cli = "cmd.cli:main"
+build_linux = "scripts.pyinstaller:build_linux"
+build_windows = "scripts.pyinstaller:build_windows"
+
 [tool.poetry.dependencies]
 python = ">=3.11,<3.13"
-
-[tool.poetry.scripts]
-cli = "py_usb_shutdown.cli:main"
-build_linux = "pyinstaller:build_linux"
-build_windows = "pyinstaller:build_windows"
 
 [tool.poetry.group.dev.dependencies]
 pyinstaller = "^6.3.0"
