@@ -4,7 +4,7 @@ let
   };
 in
 pkgs.mkShell {
-  name="dev-env-youtube-grabber";
+  name="dev-env-py-usb-shutdown";
   packages = with pkgs; [
     git
     jetbrains.pycharm-professional
